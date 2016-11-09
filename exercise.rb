@@ -4,8 +4,7 @@ class Exercise
   # Return a string in which every word in "str" that exceeds 4 characters is replaced with "marklar".
   # If the word being replaced has a capital first letter, it should instead be replaced with "Marklar".
   def self.marklar(str)
-    str.gsub(/\b[A-Z]\w{4,}\b/, 'Marklar')
-       .gsub(/\b[a-z]\w{4,}\b/, 'marklar')
+    str.gsub(/\w{5,}/) { |match| "#{match[0].upcase == match[0] ? 'M' : 'm'}arklar" }
   end
 
   # Return the sum of all even numbers in the Fibonacci sequence, up to
@@ -18,13 +17,7 @@ class Exercise
     terms = [1,1]
 
     nth.times { terms << terms[-1] + terms[-2] }
-    terms.inject(0) do |sum, num|
-      if num % 2 == 0
-        sum + num
-      else
-        sum
-      end
-    end
+    terms.inject(0) { |sum, term| term % 2 == 0 ? sum + term : sum }
   end
 
 end
